@@ -12,7 +12,7 @@
 		7EBE8EED2D95DA3A00FC551C /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBE8EEC2D95DA3A00FC551C /* AddHabitView.swift */; };
 		7EF363C42D90AA3F00E69826 /* Habit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF363C22D90AA3F00E69826 /* Habit+CoreDataClass.swift */; };
 		7EF363C52D90AA3F00E69826 /* Habit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF363C32D90AA3F00E69826 /* Habit+CoreDataProperties.swift */; };
-		7EFDD90C2D9B0E750051C9F0 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFDD90B2D9B0E750051C9F0 /* SwiftUIView.swift */; };
+		7EFDD90C2D9B0E750051C9F0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFDD90B2D9B0E750051C9F0 /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,7 +22,7 @@
 		7EF363AC2D90A8D800E69826 /* HabitTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF363C22D90AA3F00E69826 /* Habit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7EF363C32D90AA3F00E69826 /* Habit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7EFDD90B2D9B0E750051C9F0 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = SOURCE_ROOT; };
+		7EFDD90B2D9B0E750051C9F0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -55,7 +55,7 @@
 		7EDAA9EB2D944F3300D57604 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7EFDD90B2D9B0E750051C9F0 /* SwiftUIView.swift */,
+				7EFDD90B2D9B0E750051C9F0 /* Color.swift */,
 				7EBE8EE72D95865800FC551C /* HabitListView.swift */,
 				7EBE8EEC2D95DA3A00FC551C /* AddHabitView.swift */,
 			);
@@ -157,7 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EF363C42D90AA3F00E69826 /* Habit+CoreDataClass.swift in Sources */,
-				7EFDD90C2D9B0E750051C9F0 /* SwiftUIView.swift in Sources */,
+				7EFDD90C2D9B0E750051C9F0 /* Color.swift in Sources */,
 				7EBE8EED2D95DA3A00FC551C /* AddHabitView.swift in Sources */,
 				7EF363C52D90AA3F00E69826 /* Habit+CoreDataProperties.swift in Sources */,
 				7EBE8EEB2D95899C00FC551C /* HabitListViewModlel.swift in Sources */,

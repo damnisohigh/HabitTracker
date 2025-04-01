@@ -21,9 +21,11 @@ struct HabitListView: View {
         NavigationView {
             List {
                 ForEach(viewModel.habits) { habit in
+                    let habitColor = Color(hex: habit.color ?? "#FFFFFF") // Вынесли вычисление цвета
+                    
                     HStack {
                         Circle()
-                            .fill(Color(hex: habit.color ?? "#FFFFFF"))
+                            .fill(habitColor)
                             .frame(width: 20, height: 20)
                         
                         VStack(alignment: .leading) {
@@ -34,16 +36,26 @@ struct HabitListView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                             
-                            // Проверяем, есть ли цель
                             if habit.goalCount > 0 {
                                 ProgressView(value: Float(habit.currentCount), total: Float(habit.goalCount))
                                     .progressViewStyle(LinearProgressViewStyle())
                             }
                         }
                         Spacer()
+                        
+                        Button(action: {
+                            viewModel.markHabitAsCompleted(habit)
+                        }) {
+                            Image(systemName: habit.isCompleted ? "checkmark.circle.fill" : "circle")
+                                .foregroundColor(habit.isCompleted ? .green : .gray)
+                                .padding(.trailing, 10)
+                        }
+                        .buttonStyle(.plain)
+                        .contentShape(Rectangle())
                     }
                     .padding(.vertical, 5)
                 }
+
                 .onDelete(perform: deleteHabit)
             }
             .navigationTitle("Habits")

@@ -3,9 +3,6 @@
 //  HabitTracker
 //
 //  Created by DAMNISOHIGH on 23.03.2025.
-//
-//
-
 import Foundation
 import CoreData
 
@@ -29,6 +26,4 @@ extension Habit {
 
 }
 
-extension Habit : Identifiable {
-
-}
+extension Habit : Identifiable {}

@@ -22,8 +22,9 @@ class HabitListViewModlel: ObservableObject {
         
         do {
             habits = try context.fetch(request)
+            print("✅Habits loaded successfully!")
         } catch {
-            print("❌ Error loading habits: \(error.localizedDescription)")
+            print("❌Error loading habits: \(error.localizedDescription)")
         }
     }
 
@@ -47,12 +48,34 @@ class HabitListViewModlel: ObservableObject {
         saveContext()
         fetchHabits()
     }
+    
+    func markHabitAsCompleted(_ habit: Habit) {
+        let habitID = habit.objectID // Получаем уникальный ID объекта
+
+        do {
+            if let updatedHabit = try context.existingObject(with: habitID) as? Habit {
+                objectWillChange.send() // Сообщаем SwiftUI об изменениях
+                
+                if updatedHabit.currentCount < updatedHabit.goalCount {
+                    updatedHabit.currentCount += 1
+                    if updatedHabit.currentCount == updatedHabit.goalCount {
+                        updatedHabit.isCompleted = true
+                    }
+                    try context.save() 
+                    fetchHabits()
+                }
+            }
+        } catch {
+            print("❌Error fetching habit: \(error.localizedDescription)")
+        }
+    }
 
     private func saveContext() {
         do {
             try context.save()
+            print("✅Context saved successfully!")
         } catch {
-            print("❌ Error saving context: \(error.localizedDescription)")
+            print("❌Error saving context: \(error.localizedDescription)")
         }
     }
 }

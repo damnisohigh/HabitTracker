@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//Color.swift
 //  HabitTracker
 //
 //  Created by DAMNISOHIGH on 31.03.2025.
