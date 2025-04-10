@@ -9,11 +9,12 @@ import SwiftUI
 
 struct AddHabitView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel: HabitListViewModlel
+    @ObservedObject var viewModel: HabitListViewModel
     @State private var title = ""
     @State private var habitType = "Daily"
     @State private var goalCount: String = ""
     @State private var selectedColor = "#FFFFFF"
+    @State private var category = "Good"
     
     var body: some View {
         NavigationView {
@@ -24,6 +25,12 @@ struct AddHabitView: View {
                     Text("Weekly").tag("Weekly")
                     Text("Monthly").tag("Monthly")
                 }
+                
+                Picker("Category", selection: $category) {
+                    Text("Good").tag("Good")
+                    Text("Bad").tag("Bad")
+                }
+                
                 TextField("Goal (optional)", text: $goalCount)
                     .keyboardType(.numberPad)
                 
@@ -34,7 +41,7 @@ struct AddHabitView: View {
                 
                 Button("Save") {
                     let goal = Int(goalCount) ?? 0  // Если пользователь не ввел число, будет 0
-                    viewModel.addHabit(title: title, habitType: habitType, goalCount: goal, color: selectedColor)
+                    viewModel.addHabit(title: title, habitType: habitType, goalCount: goal, color: selectedColor, category: category)
                     dismiss()
                 }
             }
