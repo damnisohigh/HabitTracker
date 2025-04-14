@@ -2,7 +2,7 @@
 //  Habit+CoreDataProperties.swift
 //  HabitTracker
 //
-//  Created by DAMNISOHIGH on 04.04.2025.
+//  Created by DAMNISOHIGH on 14.04.2025.
 //
 //
 
@@ -16,6 +16,7 @@ extension Habit {
         return NSFetchRequest<Habit>(entityName: "Habit")
     }
 
+    @NSManaged public var category: String?
     @NSManaged public var color: String?
     @NSManaged public var createdAt: Date?
     @NSManaged public var currentCount: Int16
@@ -26,7 +27,7 @@ extension Habit {
     @NSManaged public var isCompleted: Bool
     @NSManaged public var lastCompletedDate: Date?
     @NSManaged public var title: String?
-    @NSManaged public var category: String?
+    @NSManaged public var lastResetDate: Date?
 
 }
 

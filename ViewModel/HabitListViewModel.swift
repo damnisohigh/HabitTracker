@@ -24,9 +24,9 @@ class HabitListViewModel: ObservableObject {
         case .all:
             return habits
         case .good:
-            return habits.filter { $0.category == "good" }
+            return habits.filter { $0.category == "Good" }
         case .bad:
-            return habits.filter { $0.category == "bad" }
+            return habits.filter { $0.category == "Bad" }
         }
     }
     
@@ -58,6 +58,10 @@ class HabitListViewModel: ObservableObject {
         newHabit.color = color
         newHabit.isCompleted = false
         newHabit.category = category
+        
+        if category == "Bad" {
+            newHabit.lastResetDate = Date()
+        }
 
         saveContext()
         fetchHabits()
@@ -92,6 +96,22 @@ class HabitListViewModel: ObservableObject {
             }
         } catch {
             print("❌ Error fetching habit: \(error.localizedDescription)")
+        }
+    }
+    
+    func resetBadHabit(_ habit: Habit) {
+        let habitID = habit.objectID
+        
+        do {
+            if let updatedHabit = try context.existingObject(with: habitID) as? Habit {
+                        objectWillChange.send()
+                        updatedHabit.lastResetDate = Date()
+                        try context.save()
+                        fetchHabits()
+                        print("🔁Reset bad habit timer")
+            }
+        } catch {
+            print("❌Error reset bad habit timer: \(error.localizedDescription)")
         }
     }
 

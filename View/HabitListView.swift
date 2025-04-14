@@ -30,39 +30,11 @@ struct HabitListView: View {
                 
                 List {
                     ForEach(viewModel.filteredHabits) { habit in
-                        let habitColor = Color(hex: habit.color ?? "#FFFFFF")
-                        
-                        HStack {
-                            Circle()
-                                .fill(habitColor)
-                                .frame(width: 20, height: 20)
-                            
-                            VStack(alignment: .leading) {
-                                Text(habit.title ?? "No Title")
-                                    .font(.headline)
-                                
-                                Text(habit.habitType ?? "Unknown")
-                                    .font(.subheadline)
-                                    .foregroundColor((habit.category ?? "").lowercased() == "bad" ? .red : .green)
-                                
-                                if habit.goalCount > 0 {
-                                    ProgressView(value: Float(habit.currentCount), total: Float(habit.goalCount))
-                                        .progressViewStyle(LinearProgressViewStyle())
-                                }
-                            }
-                            Spacer()
-                            
-                            Button(action: {
-                                viewModel.markHabitAsCompleted(habit)
-                            }) {
-                                Image(systemName: habit.isCompleted ? "checkmark.circle.fill" : "circle")
-                                    .foregroundColor(habit.isCompleted ? .green : .gray)
-                                    .padding(.trailing, 10)
-                            }
-                            .buttonStyle(.plain)
-                            .contentShape(Rectangle())
-                        }
-                        .padding(.vertical, 5)
+                        HabitRowView(
+                            habit: habit,
+                            markAsCompleted: { viewModel.markHabitAsCompleted(habit) },
+                            resetBadHabit: { viewModel.resetBadHabit(habit) }
+                        )
                     }
                     .onDelete(perform: deleteHabit)
                 }
@@ -90,6 +62,7 @@ struct HabitListView: View {
         }
     }
 }
+
 
 
 
