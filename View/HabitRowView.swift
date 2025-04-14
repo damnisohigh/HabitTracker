@@ -43,20 +43,19 @@ struct HabitRowView: View {
 
                 Spacer()
 
-                Button(action: markAsCompleted) {
-                    Image(systemName: habit.isCompleted ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(habit.isCompleted ? .green : .gray)
-                        .padding(.trailing, 10)
-                }
-                .buttonStyle(.plain)
-                .contentShape(Rectangle())
-            }
-
-            if let reset = resetBadHabit, habit.category?.lowercased() == "bad" {
-                Button(action: reset) {
-                    Text("Broke")
-                        .font(.caption)
-                        .foregroundColor(.red)
+                if habit.category?.lowercased() == "bad", let reset = resetBadHabit {
+                    Button(action: reset) {
+                        Text("Broke")
+                            .font(.caption)
+                            .foregroundColor(.red)
+                            .padding(.trailing, 10)
+                    }
+                } else {
+                    Button(action: markAsCompleted) {
+                        Image(systemName: habit.isCompleted ? "checkmark.circle.fill" : "circle")
+                            .foregroundColor(habit.isCompleted ? .green : .gray)
+                            .padding(.trailing, 10)
+                    }
                 }
             }
         }
