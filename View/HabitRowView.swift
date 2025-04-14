@@ -11,7 +11,9 @@ struct HabitRowView: View {
     let habit: Habit
     let markAsCompleted: () -> Void
     let resetBadHabit: (() -> Void)?
-
+    
+    @State private var now = Date() // текущее время, будет обновляться каждую секунду
+    
     var body: some View {
         let habitColor = Color(hex: habit.color ?? "#FFFFFF")
 
@@ -26,7 +28,7 @@ struct HabitRowView: View {
                         .font(.headline)
 
                     if habit.category?.lowercased() == "bad", let lastReset = habit.lastResetDate {
-                        Text("⏱️Abstinence: \(timeSince(lastReset))")
+                        Text("⏱️Abstinence: \(timeSince(lastReset, now: now))")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -60,5 +62,11 @@ struct HabitRowView: View {
             }
         }
         .padding(.vertical, 5)
+        .onAppear {
+            // Запускаем таймер
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+                now = Date()
+            }
+        }
     }
 }
