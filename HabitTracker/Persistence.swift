@@ -29,3 +29,8 @@ struct PersistenceController {
     }
 }
 
+#if os(iOS)
+    // iOS специфичный код
+#elseif os(macOS)
+    // macOS специфичный код
+#endif

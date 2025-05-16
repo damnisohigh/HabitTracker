@@ -12,6 +12,7 @@ struct HabitListView: View {
     
     @StateObject var viewModel: HabitListViewModel
     @State private var isShowingAddHabitView: Bool = false
+    @State private var habitToEdit: Habit? = nil
     
     init(context: NSManagedObjectContext) {
         _viewModel = StateObject(wrappedValue: HabitListViewModel(context: context))
@@ -33,7 +34,11 @@ struct HabitListView: View {
                         HabitRowView(
                             habit: habit,
                             markAsCompleted: { viewModel.markHabitAsCompleted(habit) },
-                            resetBadHabit: { viewModel.resetBadHabit(habit) }
+                            resetBadHabit: { viewModel.resetBadHabit(habit) },
+                            onEdit: {
+                                habitToEdit = habit
+                                isShowingAddHabitView = true
+                            }
                         )
                     }
                     .onDelete(perform: deleteHabit)
@@ -49,8 +54,10 @@ struct HabitListView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isShowingAddHabitView) {
-                AddHabitView(viewModel: viewModel)
+            .sheet(isPresented: $isShowingAddHabitView, onDismiss: {
+                habitToEdit = nil
+            }) {
+                HabitFormView(viewModel: viewModel, habitToEdit: habitToEdit)
             }
         }
     }
@@ -63,6 +70,11 @@ struct HabitListView: View {
     }
 }
 
+#if os(iOS)
+// iOS специфичный код
+#elseif os(macOS)
+// macOS специфичный код
+#endif
 
 
 

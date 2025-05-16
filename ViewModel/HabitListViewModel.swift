@@ -114,6 +114,17 @@ class HabitListViewModel: ObservableObject {
             print("❌Error reset bad habit timer: \(error.localizedDescription)")
         }
     }
+    
+    func updateHabit(habit: Habit, title: String, habitType: String, goalCount: Int, color: String, categoty: String) {
+        habit.title = title
+        habit.habitType = habitType
+        habit.goalCount = Int16(goalCount)
+        habit.color = color
+        habit.category = categoty
+        
+        saveContext()
+        fetchHabits()
+    }
 
     private func saveContext() {
         do {
@@ -127,3 +138,8 @@ class HabitListViewModel: ObservableObject {
 
 
 
+#if os(iOS)
+    // iOS специфичный код
+#elseif os(macOS)
+    // macOS специфичный код
+#endif

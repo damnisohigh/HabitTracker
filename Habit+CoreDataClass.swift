@@ -13,3 +13,10 @@ import CoreData
 public class Habit: NSManagedObject {
 
 }
+
+
+#if os(iOS)
+    // iOS специфичный код
+#elseif os(macOS)
+    // macOS специфичный код
+#endif

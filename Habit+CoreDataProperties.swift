@@ -32,5 +32,12 @@ extension Habit {
 }
 
 extension Habit : Identifiable {
-
+    
 }
+
+
+#if os(iOS)
+    // iOS специфичный код
+#elseif os(macOS)
+    // macOS специфичный код
+#endif

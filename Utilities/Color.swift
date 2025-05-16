@@ -42,3 +42,10 @@ extension Color {
         return String(format: "#%02X%02X%02X", r, g, b)
     }
 }
+
+
+#if os(iOS)
+// iOS специфичный код
+#elseif os(macOS)
+// macOS специфичный код
+#endif
