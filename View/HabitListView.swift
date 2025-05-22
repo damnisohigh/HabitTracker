@@ -28,7 +28,15 @@ struct HabitListView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
-                
+
+                Picker("Habit Frequency", selection: $viewModel.typeFilter) {
+                    ForEach(HabitListViewModel.HabitTypeFilter.allCases, id: \.self) { type in
+                        Text(type.rawValue).tag(type)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal)
+
                 List {
                     ForEach(viewModel.filteredHabits) { habit in
                         HabitRowView(
@@ -40,9 +48,13 @@ struct HabitListView: View {
                                 isShowingAddHabitView = true
                             }
                         )
+                        .padding(.vertical, 8) // добавляем вертикальные отступы
+                        .listRowSeparator(.hidden) // убираем разделители
+                        .listRowBackground(Color.clear) // делаем фон строки прозрачным
                     }
                     .onDelete(perform: deleteHabit)
                 }
+                .listStyle(PlainListStyle())
             }
             .navigationTitle("HabitTracker")
             .toolbar {
@@ -71,9 +83,9 @@ struct HabitListView: View {
 }
 
 #if os(iOS)
-// iOS специфичный код
+// iOS 
 #elseif os(macOS)
-// macOS специфичный код
+// macOS
 #endif
 
 

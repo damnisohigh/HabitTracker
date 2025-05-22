@@ -8,20 +8,19 @@
 import SwiftUI
 
 @main
-struct MyApp: App {
+struct HabitTrackerApp: App {
     let persistenceController = PersistenceController.shared
-    
+
     var body: some Scene {
         WindowGroup {
-            HabitListView(context: persistenceController.container.viewContext)
+            MainTabBarView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
 
-
 #if os(iOS)
-    // iOS специфичный код
+    // iOS
 #elseif os(macOS)
-    // macOS специфичный код
+    // macOS
 #endif

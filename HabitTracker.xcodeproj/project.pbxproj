@@ -10,9 +10,14 @@
 		7E2A027F2DAD4C2000A5A6CD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2A027E2DAD4C2000A5A6CD /* Color.swift */; };
 		7E2A02812DAD4C5100A5A6CD /* TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2A02802DAD4C5100A5A6CD /* TimeSince.swift */; };
 		7E2A02832DAD54F500A5A6CD /* HabitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2A02822DAD54F500A5A6CD /* HabitRowView.swift */; };
+		7EB2AF342DDA4F3700BFA4D1 /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2AF332DDA4F3700BFA4D1 /* MainTabBarView.swift */; };
+		7EB2AF362DDA506400BFA4D1 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2AF352DDA506400BFA4D1 /* StatisticsView.swift */; };
+		7EB2AF382DDA508C00BFA4D1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2AF372DDA508C00BFA4D1 /* SettingsView.swift */; };
 		7EBE8EE82D95865800FC551C /* HabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBE8EE72D95865800FC551C /* HabitListView.swift */; };
 		7EBE8EEB2D95899C00FC551C /* HabitListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBE8EEA2D95899C00FC551C /* HabitListViewModel.swift */; };
 		7EBE8EED2D95DA3A00FC551C /* HabitFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBE8EEC2D95DA3A00FC551C /* HabitFormView.swift */; };
+		7EC5725A2DDF4E0E001F10AC /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC572592DDF4E0E001F10AC /* StatisticsViewModel.swift */; };
+		7EC5725C2DDF50C0001F10AC /* Habit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5725B2DDF50C0001F10AC /* Habit+Extensions.swift */; };
 		7EF363C42D90AA3F00E69826 /* Habit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF363C22D90AA3F00E69826 /* Habit+CoreDataClass.swift */; };
 		7EF363C52D90AA3F00E69826 /* Habit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF363C32D90AA3F00E69826 /* Habit+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
@@ -21,9 +26,14 @@
 		7E2A027E2DAD4C2000A5A6CD /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7E2A02802DAD4C5100A5A6CD /* TimeSince.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSince.swift; sourceTree = "<group>"; };
 		7E2A02822DAD54F500A5A6CD /* HabitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRowView.swift; sourceTree = "<group>"; };
+		7EB2AF332DDA4F3700BFA4D1 /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
+		7EB2AF352DDA506400BFA4D1 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		7EB2AF372DDA508C00BFA4D1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7EBE8EE72D95865800FC551C /* HabitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListView.swift; sourceTree = "<group>"; };
 		7EBE8EEA2D95899C00FC551C /* HabitListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListViewModel.swift; sourceTree = "<group>"; };
 		7EBE8EEC2D95DA3A00FC551C /* HabitFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitFormView.swift; sourceTree = "<group>"; };
+		7EC572592DDF4E0E001F10AC /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		7EC5725B2DDF50C0001F10AC /* Habit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+Extensions.swift"; sourceTree = "<group>"; };
 		7EF363AC2D90A8D800E69826 /* HabitTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF363C22D90AA3F00E69826 /* Habit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7EF363C32D90AA3F00E69826 /* Habit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -61,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				7EBE8EEA2D95899C00FC551C /* HabitListViewModel.swift */,
+				7EC572592DDF4E0E001F10AC /* StatisticsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -71,6 +82,9 @@
 				7EBE8EE72D95865800FC551C /* HabitListView.swift */,
 				7EBE8EEC2D95DA3A00FC551C /* HabitFormView.swift */,
 				7E2A02822DAD54F500A5A6CD /* HabitRowView.swift */,
+				7EB2AF332DDA4F3700BFA4D1 /* MainTabBarView.swift */,
+				7EB2AF352DDA506400BFA4D1 /* StatisticsView.swift */,
+				7EB2AF372DDA508C00BFA4D1 /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -78,6 +92,7 @@
 		7EF363A32D90A8D800E69826 = {
 			isa = PBXGroup;
 			children = (
+				7EC5725B2DDF50C0001F10AC /* Habit+Extensions.swift */,
 				7EF363C22D90AA3F00E69826 /* Habit+CoreDataClass.swift */,
 				7EF363C32D90AA3F00E69826 /* Habit+CoreDataProperties.swift */,
 				7EF363AE2D90A8D800E69826 /* HabitTracker */,
@@ -170,11 +185,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB2AF342DDA4F3700BFA4D1 /* MainTabBarView.swift in Sources */,
 				7EF363C42D90AA3F00E69826 /* Habit+CoreDataClass.swift in Sources */,
 				7EBE8EED2D95DA3A00FC551C /* HabitFormView.swift in Sources */,
 				7EF363C52D90AA3F00E69826 /* Habit+CoreDataProperties.swift in Sources */,
+				7EC5725C2DDF50C0001F10AC /* Habit+Extensions.swift in Sources */,
 				7EBE8EEB2D95899C00FC551C /* HabitListViewModel.swift in Sources */,
+				7EB2AF362DDA506400BFA4D1 /* StatisticsView.swift in Sources */,
 				7E2A02832DAD54F500A5A6CD /* HabitRowView.swift in Sources */,
+				7EB2AF382DDA508C00BFA4D1 /* SettingsView.swift in Sources */,
+				7EC5725A2DDF4E0E001F10AC /* StatisticsViewModel.swift in Sources */,
 				7E2A02812DAD4C5100A5A6CD /* TimeSince.swift in Sources */,
 				7EBE8EE82D95865800FC551C /* HabitListView.swift in Sources */,
 				7E2A027F2DAD4C2000A5A6CD /* Color.swift in Sources */,

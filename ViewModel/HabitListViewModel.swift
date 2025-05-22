@@ -4,12 +4,14 @@
 //
 //  Created by DAMNISOHIGH on 27.03.2025.
 //
+
 import SwiftUI
 import CoreData
 
 class HabitListViewModel: ObservableObject {
     @Published var habits: [Habit] = []
     @Published var currentFilter: HabitFilterType = .all
+    @Published var typeFilter: HabitTypeFilter = .all
     
     private var context: NSManagedObjectContext
     
@@ -19,16 +21,20 @@ class HabitListViewModel: ObservableObject {
         case bad = "Bad"
     }
     
-    var filteredHabits: [Habit] {
-        switch currentFilter {
-        case .all:
-            return habits
-        case .good:
-            return habits.filter { $0.category == "Good" }
-        case .bad:
-            return habits.filter { $0.category == "Bad" }
-        }
+    enum HabitTypeFilter: String, CaseIterable {
+        case all = "All"
+        case daily = "Daily"
+        case weekly = "Weekly"
+        case monthly = "Monthly"
     }
+    
+    var filteredHabits: [Habit] {
+            habits.filter { habit in
+                let categoryMatch = currentFilter == .all || habit.category == currentFilter.rawValue
+                let typeMatch = typeFilter == .all || habit.habitType == typeFilter.rawValue
+                return categoryMatch && typeMatch
+            }
+        }
     
     init(context: NSManagedObjectContext) {
         self.context = context
@@ -139,7 +145,7 @@ class HabitListViewModel: ObservableObject {
 
 
 #if os(iOS)
-    // iOS специфичный код
+    // iOS 
 #elseif os(macOS)
-    // macOS специфичный код
+    // macOS
 #endif

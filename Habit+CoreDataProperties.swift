@@ -37,7 +37,7 @@ extension Habit : Identifiable {
 
 
 #if os(iOS)
-    // iOS специфичный код
+    // iOS 
 #elseif os(macOS)
-    // macOS специфичный код
+    // macOS
 #endif

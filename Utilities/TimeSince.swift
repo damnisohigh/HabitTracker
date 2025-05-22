@@ -38,7 +38,7 @@ func timeSince(_ date: Date, now: Date = Date(), shortStyle: Bool = false) -> St
  
 
 #if os(iOS)
-    // iOS специфичный код
+    // iOS 
 #elseif os(macOS)
-    // macOS специфичный код
+    // macOS
 #endif

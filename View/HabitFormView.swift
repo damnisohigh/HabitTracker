@@ -1,5 +1,5 @@
 //
-//  AddHabitView.swift
+//  HabitFormView.swift
 //  HabitTracker
 //
 //  Created by DAMNISOHIGH on 27.03.2025.
@@ -91,7 +91,7 @@ struct HabitFormView: View {
 
 
 #if os(iOS)
-    // iOS специфичный код
+    // iOS 
 #elseif os(macOS)
-    // macOS специфичный код
+    // macOS
 #endif
