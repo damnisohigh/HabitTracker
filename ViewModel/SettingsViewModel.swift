@@ -96,4 +96,12 @@ class SettingsViewModel: ObservableObject {
         UserDefaults.standard.set(globalNotificationsEnabled, forKey: SettingsKeys.globalNotificationsEnabled)
         print("Global notification setting saved: \(globalNotificationsEnabled)")
     }
+
+    var appVersion: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "N/A"
+    }
+
+    var buildVersion: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "N/A"
+    }
 }

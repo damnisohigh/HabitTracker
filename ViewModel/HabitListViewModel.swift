@@ -50,7 +50,7 @@ class HabitListViewModel: ObservableObject {
     init(context: NSManagedObjectContext) {
         self.context = context
         fetchHabits()
-        checkAndResetHabitsCompletion()
+        // checkAndResetHabitsCompletion() 
     }
     
     func fetchHabits() {

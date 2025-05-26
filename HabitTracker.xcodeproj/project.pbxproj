@@ -13,6 +13,7 @@
 		7E2A02812DAD4C5100A5A6CD /* TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2A02802DAD4C5100A5A6CD /* TimeSince.swift */; };
 		7E2A02832DAD54F500A5A6CD /* HabitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2A02822DAD54F500A5A6CD /* HabitRowView.swift */; };
 		7E87BA2C2DE50CF20084380F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E87BA2B2DE50CF20084380F /* NotificationManager.swift */; };
+		7E87BA2E2DE51CD80084380F /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E87BA2D2DE51CD80084380F /* HabitDetailView.swift */; };
 		7EB2AF342DDA4F3700BFA4D1 /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2AF332DDA4F3700BFA4D1 /* MainTabBarView.swift */; };
 		7EB2AF362DDA506400BFA4D1 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2AF352DDA506400BFA4D1 /* StatisticsView.swift */; };
 		7EB2AF382DDA508C00BFA4D1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2AF372DDA508C00BFA4D1 /* SettingsView.swift */; };
@@ -34,6 +35,7 @@
 		7E2A02802DAD4C5100A5A6CD /* TimeSince.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSince.swift; sourceTree = "<group>"; };
 		7E2A02822DAD54F500A5A6CD /* HabitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRowView.swift; sourceTree = "<group>"; };
 		7E87BA2B2DE50CF20084380F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		7E87BA2D2DE51CD80084380F /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
 		7EB2AF332DDA4F3700BFA4D1 /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		7EB2AF352DDA506400BFA4D1 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		7EB2AF372DDA508C00BFA4D1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			children = (
 				7EBE8EE72D95865800FC551C /* HabitListView.swift */,
 				7EBE8EEC2D95DA3A00FC551C /* HabitFormView.swift */,
+				7E87BA2D2DE51CD80084380F /* HabitDetailView.swift */,
 				7E2A02822DAD54F500A5A6CD /* HabitRowView.swift */,
 				7EB2AF332DDA4F3700BFA4D1 /* MainTabBarView.swift */,
 				7EB2AF352DDA506400BFA4D1 /* StatisticsView.swift */,
@@ -206,6 +209,7 @@
 				7EF363C52D90AA3F00E69826 /* Habit+CoreDataProperties.swift in Sources */,
 				7EC5725C2DDF50C0001F10AC /* Habit+Extensions.swift in Sources */,
 				7EBE8EEB2D95899C00FC551C /* HabitListViewModel.swift in Sources */,
+				7E87BA2E2DE51CD80084380F /* HabitDetailView.swift in Sources */,
 				7EB2AF362DDA506400BFA4D1 /* StatisticsView.swift in Sources */,
 				7EEDEADA2DE37BE100D47C36 /* ChartView.swift in Sources */,
 				7E2A02832DAD54F500A5A6CD /* HabitRowView.swift in Sources */,

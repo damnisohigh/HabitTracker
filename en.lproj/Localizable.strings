@@ -1,5 +1,6 @@
 /* English Localizations */
 
+// For StatisticsView
 "Statistics" = "Statistics";
 "By Frequency" = "By Frequency";
 "Daily" = "Daily";
@@ -14,7 +15,11 @@
 "Average Abstinence: %@" = "Average Abstinence: %@";
 "No bad habit data yet or no recorded abstinence periods." = "No bad habit data yet or no recorded abstinence periods.";
 "Completion Rate Chart" = "Completion Rate Chart";
+"Total:" = "Total:";
+"Completed:" = "Completed:";
+"Rate:" = "Rate:";
 
+// For SettingsView
 "Settings" = "Settings";
 "Appearance" = "Appearance";
 "Theme" = "Theme";
@@ -25,6 +30,72 @@
 "English" = "English";
 "Ukrainian" = "Ukrainian";
 "Changing the language may require an app restart to take full effect." = "Changing the language may require an app restart to take full effect.";
-
 "Notifications" = "Notifications";
 "Enable All Notifications" = "Enable All Notifications";
+"About" = "About";
+"Version" = "Version";
+"Data Management" = "Data Management";
+"Reset All Data" = "Reset All Data";
+"Confirm Reset" = "Confirm Reset";
+"Reset" = "Reset"; // For the destructive action button in alert
+"Are you sure you want to reset all data? This action cannot be undone." = "Are you sure you want to reset all data? This action cannot be undone.";
+
+
+// For HabitListView & HabitFormView & HabitRowView & HabitDetailView
+"Filter" = "Filter";
+"Habit Frequency" = "Habit Frequency";
+"All" = "All";
+"Good" = "Good";
+"Bad" = "Bad";
+// "Daily", "Weekly", "Monthly" already listed under Statistics
+"HabitTracker" = "HabitTracker"; // App name / main screen title
+"Add" = "Add";
+"No Title" = "No Title";
+"Abstinence: %@" = "Abstinence: %@";
+"Unknown" = "Unknown"; // For unknown habit type or category
+"Broke" = "Broke";
+"Habit Details" = "Habit Details";
+"Details" = "Details";
+"No details provided." = "No details provided.";
+"Type:" = "Type:"; // Label for habit type in detail view
+"Category:" = "Category:"; // Label for habit category in detail view
+"Goal:" = "Goal:"; // Label for habit goal in detail view
+"Created:" = "Created:"; // Label for habit creation date in detail view
+"Done" = "Done";
+"Edit" = "Edit";
+"No habits yet!" = "No habits yet!";
+"Tap the '+' button to add your first habit." = "Tap the '+' button to add your first habit.";
+
+// For HabitFormView
+"Create Habit" = "Create Habit";
+"Edit Habit" = "Edit Habit";
+"Title" = "Title";
+"Enter habit title" = "Enter habit title";
+// "Details" already listed
+"Enter habit details (optional)" = "Enter habit details (optional)";
+"Type" = "Type"; // Picker label for habit type
+// "Category" already listed
+"Good Habit" = "Good Habit";
+"Bad Habit" = "Bad Habit";
+"Goal" = "Goal"; // For goal count
+"Times" = "Times"; // e.g., "5 Times"
+"Color" = "Color";
+"Enable Notifications" = "Enable Notifications";
+"Reminder Time" = "Reminder Time";
+"Save" = "Save";
+"Cancel" = "Cancel"; // Also used in Reset Alert
+
+// For Pickers (if their rawValues are used directly with NSLocalizedString)
+// "System", "Light", "Dark" for Theme already listed
+// "English", "Ukrainian" for Language already listed
+// "All", "Good", "Bad" for HabitFilterType already listed
+// "All", "Daily", "Weekly", "Monthly" for HabitTypeFilter already listed
+
+// For NotificationManager or general alerts
+"Habit Reminder" = "Habit Reminder";
+"Don't forget to complete your habit: %@" = "Don't forget to complete your habit: %@";
+
+// For MainTabBarView (though they might already work if English is base)
+"Habits" = "Habits";
+"Stats" = "Stats";
+// "Settings" is already defined

@@ -13,6 +13,7 @@ struct HabitListView: View {
     @StateObject private var viewModel: HabitListViewModel
     @State private var isShowingAddHabitView = false
     @State private var habitToEdit: Habit? = nil
+    @State private var selectedHabitForDetail: Habit? = nil
 
     init(context: NSManagedObjectContext) {
         _viewModel = StateObject(wrappedValue: HabitListViewModel(context: context))
@@ -37,24 +38,47 @@ struct HabitListView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
 
-                List {
-                    ForEach(viewModel.filteredHabits) { habit in
-                        HabitRowView(
-                            habit: habit,
-                            markAsCompleted: { viewModel.markHabitAsCompleted(habit) },
-                            resetBadHabit: { viewModel.resetBadHabit(habit) },
-                            onEdit: {
-                                habitToEdit = habit
-                                isShowingAddHabitView = true
-                            }
-                        )
-                        .padding(.vertical, 8)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear) 
+                if viewModel.filteredHabits.isEmpty {
+                    Spacer() // Pushes content to the center
+                    VStack(spacing: 16) {
+                        Image(systemName: "figure.mind.and.body") // Example icon
+                            .font(.system(size: 60))
+                            .foregroundColor(.secondary)
+                        Text(NSLocalizedString("No habits yet!", comment: "Placeholder text when no habits are present"))
+                            .font(.title2)
+                            .foregroundColor(.secondary)
+                        Text(NSLocalizedString("Tap the '+' button to add your first habit.", comment: "Instruction to add a new habit"))
+                            .font(.body)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
                     }
-                    .onDelete(perform: deleteHabit)
+                    Spacer() // Pushes content to the center
+                } else {
+                    List {
+                        ForEach(viewModel.filteredHabits) { habit in
+                            HabitRowView(
+                                habit: habit,
+                                markAsCompleted: { viewModel.markHabitAsCompleted(habit) },
+                                resetBadHabit: { viewModel.resetBadHabit(habit) },
+                                onEdit: {
+                                    habitToEdit = habit
+                                    isShowingAddHabitView = true
+                                },
+                                onRowTap: {
+                                    // Only navigate if details exist (though HabitRowView also checks this)
+                                    if habit.details != nil && !(habit.details ?? "").isEmpty {
+                                        // Set selectedHabitForDetail to show detail view
+                                        selectedHabitForDetail = habit
+                                    }
+                                }
+                            )
+                            .listRowSeparator(.hidden)
+                        }
+                        .onDelete(perform: deleteHabit)
+                    }
+                    .listStyle(PlainListStyle())
                 }
-                .listStyle(PlainListStyle())
             }
             .navigationTitle(NSLocalizedString("HabitTracker", comment: "App name / main screen title"))
             .toolbar {
@@ -71,6 +95,9 @@ struct HabitListView: View {
             }) {
                 HabitFormView(viewModel: viewModel, habitToEdit: habitToEdit)
             }
+            .sheet(item: $selectedHabitForDetail) { habit in
+                HabitDetailView(habit: habit)
+            }
         }
         .onAppear {
             viewModel.fetchHabits()
@@ -85,7 +112,7 @@ struct HabitListView: View {
 }
 
 #if os(iOS)
-// iOS 
+// iOS
 #elseif os(macOS)
 // macOS
 #endif

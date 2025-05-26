@@ -24,3 +24,15 @@
 "English" = "Английский";
 "Ukrainian" = "Украинский";
 "Changing the language may require an app restart to take full effect." = "Изменение языка может потребовать перезапуска приложения для полного вступления в силу.";
+"Habit Details" = "Детали Привычки";
+"Details" = "Детали";
+"No details provided." = "Детали не указаны.";
+"Type:" = "Тип:";
+"Category:" = "Категория:";
+"Goal:" = "Цель:";
+"Created:" = "Создана:";
+"Done" = "Готово";
+"Edit" = "Править";
+"Unknown" = "Неизвестно";
+"No habits yet!" = "Привычек пока нет!";
+"Tap the '+' button to add your first habit." = "Нажмите кнопку '+' чтобы добавить первую привычку.";
