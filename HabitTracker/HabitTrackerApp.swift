@@ -31,6 +31,13 @@ struct HabitTrackerApp: App {
             UserDefaults.standard.set([appLanguage.localeIdentifier], forKey: "AppleLanguages")
             // UserDefaults.standard.synchronize() // synchronize() больше не нужен в современных iOS
         }
+        NotificationManager.shared.requestAuthorization { granted in
+            if granted {
+                print("Notification permission granted.")
+            } else {
+                print("Notification permission denied.")
+            }
+        }
     }
 
     var body: some Scene {

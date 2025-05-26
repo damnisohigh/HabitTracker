@@ -7,11 +7,13 @@
 
 import SwiftUI
 import Combine
+import UserNotifications
 
 // Определяем ключи для UserDefaults
 enum SettingsKeys {
     static let appTheme = "appTheme"
     static let appLanguage = "appLanguage"
+    static let globalNotificationsEnabled = "globalNotificationsEnabled"
 }
 
 // Возможные варианты темы
@@ -52,6 +54,18 @@ class SettingsViewModel: ObservableObject {
             print("AppleLanguages set to: [\(selectedLanguage.localeIdentifier)]. App restart might be needed for full effect.")
         }
     }
+    @Published var globalNotificationsEnabled: Bool {
+        didSet {
+            saveGlobalNotificationsSetting()
+            if !globalNotificationsEnabled {
+                NotificationManager.shared.cancelAllNotifications()
+                print("All pending notifications cancelled due to global setting.")
+            }
+            // If globally enabled, existing per-habit notifications are NOT automatically rescheduled here.
+            // This would require iterating through all habits and calling scheduleOrCancelNotification.
+            // For simplicity, we'll let them be rescheduled individually or upon app restart/habit reset.
+        }
+    }
 
     init() {
         let savedThemeRaw = UserDefaults.standard.string(forKey: SettingsKeys.appTheme) ?? AppTheme.system.rawValue
@@ -60,7 +74,9 @@ class SettingsViewModel: ObservableObject {
         let savedLanguageRaw = UserDefaults.standard.string(forKey: SettingsKeys.appLanguage) ?? AppLanguage.english.rawValue
         self.selectedLanguage = AppLanguage(rawValue: savedLanguageRaw) ?? .english
         
-        print("SettingsViewModel initialized. Theme: \(selectedTheme.rawValue), Language: \(selectedLanguage.rawValue)")
+        self.globalNotificationsEnabled = UserDefaults.standard.object(forKey: SettingsKeys.globalNotificationsEnabled) as? Bool ?? true
+        
+        print("SettingsViewModel initialized. Theme: \(selectedTheme.rawValue), Language: \(selectedLanguage.rawValue), Global Notifications: \(globalNotificationsEnabled)")
     }
 
     // Функции для сохранения, если решим не использовать didSet
@@ -74,5 +90,10 @@ class SettingsViewModel: ObservableObject {
         UserDefaults.standard.set(selectedLanguage.rawValue, forKey: SettingsKeys.appLanguage)
         print("Language saved: \(selectedLanguage.rawValue)")
         // Здесь может быть логика немедленного применения языка
+    }
+    
+    func saveGlobalNotificationsSetting() {
+        UserDefaults.standard.set(globalNotificationsEnabled, forKey: SettingsKeys.globalNotificationsEnabled)
+        print("Global notification setting saved: \(globalNotificationsEnabled)")
     }
 }

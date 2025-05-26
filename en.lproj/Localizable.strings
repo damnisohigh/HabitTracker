@@ -1,10 +1,19 @@
-/* 
-  Localizable.strings
-  HabitTracker
+/* English Localizations */
 
-  Created by DAMNISOHIGH on 26.05.2025.
-  
-*/
+"Statistics" = "Statistics";
+"By Frequency" = "By Frequency";
+"Daily" = "Daily";
+"Weekly" = "Weekly";
+"Monthly" = "Monthly";
+"StatsFormat_Total_Completed_Rate" = "Total: %d, Completed: %d, Rate: %d%%";
+"Created today" = "Created today";
+"Created this week" = "Created this week";
+"Created this month" = "Created this month";
+"Bad Habits Insights" = "Bad Habits Insights";
+"Longest Abstinence: %@" = "Longest Abstinence: %@";
+"Average Abstinence: %@" = "Average Abstinence: %@";
+"No bad habit data yet or no recorded abstinence periods." = "No bad habit data yet or no recorded abstinence periods.";
+"Completion Rate Chart" = "Completion Rate Chart";
 
 "Settings" = "Settings";
 "Appearance" = "Appearance";
@@ -16,3 +25,6 @@
 "English" = "English";
 "Ukrainian" = "Ukrainian";
 "Changing the language may require an app restart to take full effect." = "Changing the language may require an app restart to take full effect.";
+
+"Notifications" = "Notifications";
+"Enable All Notifications" = "Enable All Notifications";

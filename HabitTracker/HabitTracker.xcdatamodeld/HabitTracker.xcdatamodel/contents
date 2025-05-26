@@ -14,6 +14,9 @@
         <attribute name="lastCompletedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastResetDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="longestAbstinenceDuration" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="notificationHour" attributeType="Integer 16" defaultValueString="9" usesScalarValueType="YES"/>
+        <attribute name="notificationMinute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="notificationsEnabled" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="totalAbstinenceDuration" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>

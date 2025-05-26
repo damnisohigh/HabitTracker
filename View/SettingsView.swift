@@ -39,6 +39,10 @@ struct SettingsView: View {
                         .foregroundColor(.gray)
                 }
                 
+                Section(header: Text(NSLocalizedString("Notifications", comment: "Section header for notification settings"))) {
+                    Toggle(NSLocalizedString("Enable All Notifications", comment: "Toggle label for enabling/disabling all notifications"), isOn: $viewModel.globalNotificationsEnabled)
+                }
+                
                 // Можно добавить другие секции настроек здесь
             }
             .navigationTitle(NSLocalizedString("Settings", comment: "Navigation title for settings screen"))

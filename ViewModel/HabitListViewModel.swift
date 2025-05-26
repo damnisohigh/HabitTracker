@@ -50,6 +50,7 @@ class HabitListViewModel: ObservableObject {
     init(context: NSManagedObjectContext) {
         self.context = context
         fetchHabits()
+        checkAndResetHabitsCompletion()
     }
     
     func fetchHabits() {
@@ -71,7 +72,48 @@ class HabitListViewModel: ObservableObject {
         }
     }
     
-    func addHabit(title: String, details: String, type: String, goalCount: Int16, color: String, category: String) {
+    private func scheduleOrCancelNotification(for habit: Habit) {
+        guard let habitId = habit.id?.uuidString else {
+            print("❌ Habit ID is nil, cannot schedule or cancel notification.")
+            return
+        }
+        
+        let globalNotificationsOn = UserDefaults.standard.object(forKey: SettingsKeys.globalNotificationsEnabled) as? Bool ?? true
+        
+        if habit.notificationsEnabled && globalNotificationsOn {
+            let title = habit.title ?? "Habit Reminder"
+            let body = "Don't forget to complete your habit: \(habit.title ?? "")"
+            
+            var weekday: Int? = nil
+            var day: Int? = nil
+            let calendar = Calendar.current
+            
+            if habit.habitType == "Weekly" {
+                // For weekly habits, use the weekday of creation.
+                // Weekday: 1 = Sunday, 2 = Monday, ..., 7 = Saturday
+                weekday = calendar.component(.weekday, from: habit.createdAt ?? Date())
+            } else if habit.habitType == "Monthly" {
+                // For monthly habits, use the day of the month of creation.
+                day = calendar.component(.day, from: habit.createdAt ?? Date())
+            }
+            // For "Daily" habits, weekday and day remain nil, so it repeats daily at the specified time.
+
+            NotificationManager.shared.scheduleNotification(
+                habitId: habitId,
+                title: title,
+                body: body,
+                hour: Int(habit.notificationHour),
+                minute: Int(habit.notificationMinute),
+                weekday: weekday,
+                day: day,
+                repeats: true 
+            )
+        } else {
+            NotificationManager.shared.cancelNotification(habitId: habitId)
+        }
+    }
+    
+    func addHabit(title: String, details: String, type: String, goalCount: Int16, color: String, category: String, notificationsEnabled: Bool, notificationHour: Int16, notificationMinute: Int16) {
         let newHabit = Habit(context: context)
         newHabit.id = UUID()
         newHabit.title = title
@@ -83,6 +125,9 @@ class HabitListViewModel: ObservableObject {
         newHabit.color = color
         newHabit.isCompleted = false
         newHabit.category = category
+        newHabit.notificationsEnabled = notificationsEnabled
+        newHabit.notificationHour = notificationHour
+        newHabit.notificationMinute = notificationMinute
         
         if category == badHabitCategoryString {
             newHabit.lastResetDate = Date()
@@ -93,9 +138,13 @@ class HabitListViewModel: ObservableObject {
 
         saveContext()
         fetchHabits()
+        scheduleOrCancelNotification(for: newHabit)
     }
 
     func deleteHabit(_ habit: Habit) {
+        if let habitId = habit.id?.uuidString {
+            NotificationManager.shared.cancelNotification(habitId: habitId)
+        }
         context.delete(habit)
         saveContext()
         fetchHabits()
@@ -114,11 +163,23 @@ class HabitListViewModel: ObservableObject {
                         if updatedHabit.currentCount == updatedHabit.goalCount {
                             updatedHabit.isCompleted = true
                             updatedHabit.lastCompletedDate = Date()
+                            if updatedHabit.notificationsEnabled {
+                                if let habitId = updatedHabit.id?.uuidString {
+                                    NotificationManager.shared.cancelNotification(habitId: habitId)
+                                    print("Cancelled notification for completed habit: \(updatedHabit.title ?? "")")
+                                }
+                            }
                         }
                     }
                 } else {
                     updatedHabit.isCompleted = true
-                    updatedHabit.lastCompletedDate = Date() 
+                    updatedHabit.lastCompletedDate = Date()
+                    if updatedHabit.notificationsEnabled {
+                         if let habitId = updatedHabit.id?.uuidString {
+                            NotificationManager.shared.cancelNotification(habitId: habitId)
+                            print("Cancelled notification for completed habit: \(updatedHabit.title ?? "")")
+                        }
+                    }
                 }
 
                 try context.save()
@@ -160,16 +221,71 @@ class HabitListViewModel: ObservableObject {
         }
     }
     
-    func updateHabit(habit: Habit, title: String, details: String, type: String, goalCount: Int16, color: String, category: String) {
+    func updateHabit(habit: Habit, title: String, details: String, type: String, goalCount: Int16, color: String, category: String, notificationsEnabled: Bool, notificationHour: Int16, notificationMinute: Int16) {
         habit.title = title
         habit.details = details
         habit.habitType = type
         habit.goalCount = goalCount
         habit.color = color
         habit.category = category
+        habit.notificationsEnabled = notificationsEnabled
+        habit.notificationHour = notificationHour
+        habit.notificationMinute = notificationMinute
         
         saveContext()
         fetchHabits()
+        scheduleOrCancelNotification(for: habit)
+    }
+
+    func checkAndResetHabitsCompletion() {
+        let calendar = Calendar.current
+        let now = Date()
+        var habitsDidChange = false
+
+        for habit in habits {
+            guard let lastReset = habit.lastResetDate else {
+                // If lastResetDate is nil, set it to now and continue (for newly created habits)
+                habit.lastResetDate = now
+                habitsDidChange = true
+                continue
+            }
+
+            var shouldReset = false
+            if habit.habitType == "Daily" {
+                if !calendar.isDateInToday(lastReset) {
+                    shouldReset = true
+                }
+            } else if habit.habitType == "Weekly" {
+                if !calendar.isDate(lastReset, equalTo: now, toGranularity: .weekOfYear) {
+                    shouldReset = true
+                }
+            } else if habit.habitType == "Monthly" {
+                if !calendar.isDate(lastReset, equalTo: now, toGranularity: .month) {
+                    shouldReset = true
+                }
+            }
+
+            if shouldReset {
+                habit.isCompleted = false
+                habit.currentCount = 0
+                habit.lastResetDate = now // Update last reset date
+                habitsDidChange = true
+                print("Reset habit: \(habit.title ?? "Unknown")")
+
+                // Reschedule notification if it's enabled and habit is not a "Bad" habit
+                // (Bad habits don't get "completed" in the same way and don't need reminders to "do" them)
+                if habit.notificationsEnabled && habit.category != badHabitCategoryString && !habit.isCompleted {
+                    scheduleOrCancelNotification(for: habit)
+                    print("Rescheduled notification for reset habit: \(habit.title ?? "")")
+                }
+            }
+        }
+
+        if habitsDidChange {
+            saveContext()
+            fetchHabits() // Refetch to update UI if needed
+            print("Habit completion statuses checked and reset where necessary.")
+        }
     }
 }
 

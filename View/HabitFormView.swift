@@ -19,6 +19,8 @@ struct HabitFormView: View {
     @State private var goalCount: String = ""
     @State private var selectedColor: String = "#FFFFFF"
     @State private var category: String = "Good"
+    @State private var notificationsEnabled: Bool = false
+    @State private var notificationTime: Date = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date()) ?? Date()
 
     var body: some View {
         NavigationView {
@@ -45,8 +47,18 @@ struct HabitFormView: View {
                     set: { selectedColor = $0.toHex() }
                 ))
 
+                Section(header: Text("Notifications")) {
+                    Toggle("Enable Notifications", isOn: $notificationsEnabled)
+                    if notificationsEnabled {
+                        DatePicker("Reminder Time", selection: $notificationTime, displayedComponents: .hourAndMinute)
+                    }
+                }
+
                 Button("Save") {
                     let goal: Int16 = Int16(goalCount) ?? 0
+                    let calendar = Calendar.current
+                    let hour = calendar.component(.hour, from: notificationTime)
+                    let minute = calendar.component(.minute, from: notificationTime)
 
                     if let habit = habitToEdit {
                         viewModel.updateHabit(
@@ -56,7 +68,10 @@ struct HabitFormView: View {
                             type: habitType,
                             goalCount: goal,
                             color: selectedColor,
-                            category: category
+                            category: category,
+                            notificationsEnabled: notificationsEnabled,
+                            notificationHour: Int16(hour),
+                            notificationMinute: Int16(minute)
                         )
                     } else {
                         viewModel.addHabit(
@@ -65,7 +80,10 @@ struct HabitFormView: View {
                             type: habitType,
                             goalCount: goal,
                             color: selectedColor,
-                            category: category
+                            category: category,
+                            notificationsEnabled: notificationsEnabled,
+                            notificationHour: Int16(hour),
+                            notificationMinute: Int16(minute)
                         )
                     }
 
@@ -88,6 +106,11 @@ struct HabitFormView: View {
                     goalCount = habit.goalCount > 0 ? "\(habit.goalCount)" : ""
                     selectedColor = habit.color ?? "#FFFFFF"
                     category = habit.category ?? "Good"
+                    notificationsEnabled = habit.notificationsEnabled
+                    var components = DateComponents()
+                    components.hour = Int(habit.notificationHour)
+                    components.minute = Int(habit.notificationMinute)
+                    notificationTime = Calendar.current.date(from: components) ?? Date()
                 }
             }
         }
@@ -95,7 +118,7 @@ struct HabitFormView: View {
 }
 
 #if os(iOS)
-    // iOS 
+    // iOS
 #elseif os(macOS)
     // macOS
 #endif
