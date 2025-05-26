@@ -14,6 +14,7 @@ struct HabitFormView: View {
     let habitToEdit: Habit?
 
     @State private var title: String = ""
+    @State private var details: String = ""
     @State private var habitType: String = "Daily"
     @State private var goalCount: String = ""
     @State private var selectedColor: String = "#FFFFFF"
@@ -23,6 +24,7 @@ struct HabitFormView: View {
         NavigationView {
             Form {
                 TextField("Habit Name", text: $title)
+                TextField("Details (optional)", text: $details)
 
                 Picker("Habit Type", selection: $habitType) {
                     Text("Daily").tag("Daily")
@@ -44,21 +46,23 @@ struct HabitFormView: View {
                 ))
 
                 Button("Save") {
-                    let goal = Int(goalCount) ?? 0
+                    let goal: Int16 = Int16(goalCount) ?? 0
 
                     if let habit = habitToEdit {
                         viewModel.updateHabit(
                             habit: habit,
                             title: title,
-                            habitType: habitType,
+                            details: details,
+                            type: habitType,
                             goalCount: goal,
                             color: selectedColor,
-                            categoty: category
+                            category: category
                         )
                     } else {
                         viewModel.addHabit(
                             title: title,
-                            habitType: habitType,
+                            details: details,
+                            type: habitType,
                             goalCount: goal,
                             color: selectedColor,
                             category: category
@@ -79,6 +83,7 @@ struct HabitFormView: View {
             .onAppear {
                 if let habit = habitToEdit {
                     title = habit.title ?? ""
+                    details = habit.details ?? ""
                     habitType = habit.habitType ?? "Daily"
                     goalCount = habit.goalCount > 0 ? "\(habit.goalCount)" : ""
                     selectedColor = habit.color ?? "#FFFFFF"
@@ -88,7 +93,6 @@ struct HabitFormView: View {
         }
     }
 }
-
 
 #if os(iOS)
     // iOS 

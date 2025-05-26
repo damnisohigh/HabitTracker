@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  HabitTracker
+
+  Created by DAMNISOHIGH on 26.05.2025.
+  
+*/
+
+"Settings" = "Settings";
+"Appearance" = "Appearance";
+"Theme" = "Theme";
+"Language" = "Language";
+"System" = "System";
+"Light" = "Light";
+"Dark" = "Dark";
+"English" = "English";
+"Ukrainian" = "Ukrainian";
+"Changing the language may require an app restart to take full effect." = "Changing the language may require an app restart to take full effect.";

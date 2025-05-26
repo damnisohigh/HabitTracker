@@ -2,7 +2,7 @@
 //  Habit+CoreDataProperties.swift
 //  HabitTracker
 //
-//  Created by DAMNISOHIGH on 14.04.2025.
+//  Created by DAMNISOHIGH on 26.05.2025.
 //
 //
 
@@ -26,18 +26,14 @@ extension Habit {
     @NSManaged public var id: UUID?
     @NSManaged public var isCompleted: Bool
     @NSManaged public var lastCompletedDate: Date?
-    @NSManaged public var title: String?
     @NSManaged public var lastResetDate: Date?
+    @NSManaged public var title: String?
+    @NSManaged public var longestAbstinenceDuration: Double
+    @NSManaged public var totalAbstinenceDuration: Double
+    @NSManaged public var abstinencePeriodsCount: Int64
 
 }
 
 extension Habit : Identifiable {
-    
+
 }
-
-
-#if os(iOS)
-    // iOS 
-#elseif os(macOS)
-    // macOS
-#endif

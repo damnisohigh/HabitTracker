@@ -9,29 +9,29 @@ import SwiftUI
 import CoreData
 
 struct HabitListView: View {
-    
-    @StateObject var viewModel: HabitListViewModel
-    @State private var isShowingAddHabitView: Bool = false
+    @Environment(\.managedObjectContext) private var context
+    @StateObject private var viewModel: HabitListViewModel
+    @State private var isShowingAddHabitView = false
     @State private var habitToEdit: Habit? = nil
-    
+
     init(context: NSManagedObjectContext) {
         _viewModel = StateObject(wrappedValue: HabitListViewModel(context: context))
     }
-    
+
     var body: some View {
         NavigationView {
             VStack {
-                Picker("Type of habit", selection: $viewModel.currentFilter) {
+                Picker(NSLocalizedString("Filter", comment: "Picker label for habit category filter"), selection: $viewModel.currentFilter) {
                     ForEach(HabitListViewModel.HabitFilterType.allCases, id: \.self) { filter in
-                        Text(filter.rawValue).tag(filter)
+                        Text(NSLocalizedString(filter.rawValue, comment: "Habit filter type raw value")).tag(filter)
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
 
-                Picker("Habit Frequency", selection: $viewModel.typeFilter) {
+                Picker(NSLocalizedString("Habit Frequency", comment: "Picker label for habit frequency filter"), selection: $viewModel.typeFilter) {
                     ForEach(HabitListViewModel.HabitTypeFilter.allCases, id: \.self) { type in
-                        Text(type.rawValue).tag(type)
+                        Text(NSLocalizedString(type.rawValue, comment: "Habit type filter raw value")).tag(type)
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
@@ -48,21 +48,21 @@ struct HabitListView: View {
                                 isShowingAddHabitView = true
                             }
                         )
-                        .padding(.vertical, 8) // добавляем вертикальные отступы
-                        .listRowSeparator(.hidden) // убираем разделители
-                        .listRowBackground(Color.clear) // делаем фон строки прозрачным
+                        .padding(.vertical, 8)
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(Color.clear) 
                     }
                     .onDelete(perform: deleteHabit)
                 }
                 .listStyle(PlainListStyle())
             }
-            .navigationTitle("HabitTracker")
+            .navigationTitle(NSLocalizedString("HabitTracker", comment: "App name / main screen title"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         isShowingAddHabitView = true
                     }) {
-                        Label("Add", systemImage: "plus")
+                        Label(NSLocalizedString("Add", comment: "Add button label"), systemImage: "plus")
                     }
                 }
             }
@@ -72,12 +72,14 @@ struct HabitListView: View {
                 HabitFormView(viewModel: viewModel, habitToEdit: habitToEdit)
             }
         }
+        .onAppear {
+            viewModel.fetchHabits()
+        }
     }
-    
-    private func deleteHabit(at offsets: IndexSet) {
-        offsets.forEach { index in
-            let habit = viewModel.filteredHabits[index]
-            viewModel.deleteHabit(habit)
+
+    private func deleteHabit(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { viewModel.filteredHabits[$0] }.forEach(viewModel.deleteHabit)
         }
     }
 }
@@ -87,7 +89,3 @@ struct HabitListView: View {
 #elseif os(macOS)
 // macOS
 #endif
-
-
-
-

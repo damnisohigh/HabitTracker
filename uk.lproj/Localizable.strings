@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  HabitTracker
+
+  Created by DAMNISOHIGH on 26.05.2025.
+  
+*/
+
+// Common Enums
+"System" = "Системна";
+"Light" = "Світла";
+"Dark" = "Темна";
+"English" = "Англійська";
+"Ukrainian" = "Українська";
+"All" = "Всі"; // Для фильтров
+"Good" = "Хороші"; // Для фильтров
+"Bad" = "Погані"; // Для фильтров
+"Daily" = "Щоденні"; // Также для HabitType/Frequency
+"Weekly" = "Щотижневі"; // Также для HabitType/Frequency
+"Monthly" = "Щомісячні"; // Также для HabitType/Frequency
+
+// MainTabBarView
+"Habits" = "Звички";
+"Stats" = "Статистика";
+"Settings" = "Налаштування"; // Уже было
+
+// HabitListView
+"Filter" = "Фільтр";
+"Habit Frequency" = "Частота звички";
+"HabitTracker" = "Трекер Звичок"; // Название приложения
+"Add" = "Додати";
+
+// HabitFormView
+"Habit Name" = "Назва звички";
+"Details (optional)" = "Деталі (необов'язково)";
+"Habit Type" = "Тип звички";
+"Category" = "Категорія";
+"Goal (optional)" = "Ціль (необов'язково)";
+"Choose Color" = "Обрати колір";
+"Save" = "Зберегти";
+"Add Habit" = "Додати звичку";
+"Edit Habit" = "Редагувати звичку";
+"Cancel" = "Скасувати";
+
+// StatisticsView
+"Statistics" = "Статистика"; // Уже было как "Stats" в таббаре, можно унифицировать
+"By Frequency" = "За частотою";
+"StatsFormat_Total_Completed_Rate" = "Всього: %lld, Виконано: %lld, Рейтинг: %lld%%";
+"Created today" = "Створено сьогодні";
+"Created this week" = "Створено цього тижня";
+"Created this month" = "Створено цього місяця";
+"Bad Habits Insights" = "Статистика поганих звичок";
+"Longest Abstinence: %@" = "Найдовше утримання: %@";
+"Average Abstinence: %@" = "Середнє утримання: %@";
+"No bad habit data yet or no recorded abstinence periods." = "Ще немає даних по поганим звичкам або записаних періодів утримання.";
+"Completion Rate Chart" = "Графік рейтингу виконання";
+"Good Habits Completion Rate" = "Рейтинг виконання хороших звичок";
+
+
+// SettingsView (часть уже была)
+"Appearance" = "Вигляд";
+"Theme" = "Тема";
+"Language" = "Мова";
+"Changing the language may require an app restart to take full effect." = "Зміна мови може вимагати перезапуску програми для повного застосування.";

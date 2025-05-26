@@ -8,31 +8,39 @@
 import Foundation
 
 func timeSince(_ date: Date, now: Date = Date(), shortStyle: Bool = false) -> String {
-    let interval = Int(now.timeIntervalSince(date))
+    let interval = now.timeIntervalSince(date)
+
+    if interval <= 0 {
+        // Для простоты и чтобы избежать NSLocalizedString пока проблема не решена
+        return shortStyle ? "0s" : "0 seconds" 
+    }
+
+    let formatter = DateComponentsFormatter()
+    // НЕ УСТАНАВЛИВАЕМ formatter.locale, чтобы избежать ошибки компиляции
+    // Он будет использовать системную локаль по умолчанию.
     
-    let days = interval / 86400
-    let hours = (interval % 86400) / 3600
-    let minutes = (interval % 3600) / 60
-    let seconds = interval % 60
+    formatter.allowedUnits = [.day, .hour, .minute, .second]
+    formatter.unitsStyle = shortStyle ? .abbreviated : .full 
+    formatter.maximumUnitCount = shortStyle ? 2 : 2 // Можно настроить по-разному для short и full
 
+    // Дополнительная логика для shortStyle, чтобы сделать его более компактным, как в твоей оригинальной функции
     if shortStyle {
-        if days > 0 {
-            return "\(days)d \(hours)h"
-        } else if hours > 0 {
-            return "\(hours)h \(minutes)m"
-        } else if minutes > 0 {
-            return "\(minutes)m \(seconds)s"
-        } else {
-            return "\(seconds)s"
+        if interval >= 86400 { // Больше или равно дню
+            formatter.allowedUnits = [.day, .hour]
+        } else if interval >= 3600 { // Больше или равно часу
+            formatter.allowedUnits = [.hour, .minute]
+        } else if interval >= 60 { // Больше или равно минуте
+            formatter.allowedUnits = [.minute, .second]
+        } else { // Секунды
+            formatter.allowedUnits = [.second]
+            formatter.maximumUnitCount = 1 // Только секунды, без "0м"
         }
+    }
+    
+    if let formattedString = formatter.string(from: interval) {
+        return formattedString
     } else {
-        var components: [String] = []
-        if days > 0 { components.append("\(days) day" + (days > 1 ? "s" : "")) }
-        if hours > 0 { components.append("\(hours) hour" + (hours > 1 ? "s" : "")) }
-        if minutes > 0 { components.append("\(minutes) minute" + (minutes > 1 ? "s" : "")) }
-        if seconds > 0 || components.isEmpty { components.append("\(seconds) second" + (seconds > 1 ? "s" : "")) }
-
-        return components.joined(separator: " ")
+        return "Error formatting time"
     }
 }
  

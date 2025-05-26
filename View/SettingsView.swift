@@ -8,8 +8,51 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @StateObject private var viewModel = SettingsViewModel()
+
     var body: some View {
-        Text("Settings Soon!")
+        NavigationView {
+            Form {
+                Section(header: Text(NSLocalizedString("Appearance", comment: "Section header for appearance settings"))) {
+                    Picker(NSLocalizedString("Theme", comment: "Theme picker label"), selection: $viewModel.selectedTheme) {
+                        ForEach(AppTheme.allCases) { theme in
+                            Text(NSLocalizedString(theme.rawValue, comment: "Theme option name")).tag(theme)
+                        }
+                    }
+                    // Если нужно сохранять при каждом изменении, можно добавить .onChange
+                    // .onChange(of: viewModel.selectedTheme) { newValue in
+                    //     viewModel.saveTheme()
+                    // }
+                }
+
+                Section(header: Text(NSLocalizedString("Language", comment: "Section header for language settings"))) {
+                    Picker(NSLocalizedString("Language", comment: "Language picker label"), selection: $viewModel.selectedLanguage) {
+                        ForEach(AppLanguage.allCases) { language in
+                            Text(NSLocalizedString(language.rawValue, comment: "Language option name")).tag(language)
+                        }
+                    }
+                    // .onChange(of: viewModel.selectedLanguage) { newValue in
+                    //     viewModel.saveLanguage()
+                    // }
+                    Text(NSLocalizedString("Changing the language may require an app restart to take full effect.", comment: "Restart warning for language change"))
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                
+                // Можно добавить другие секции настроек здесь
+            }
+            .navigationTitle(NSLocalizedString("Settings", comment: "Navigation title for settings screen"))
+            // Можно добавить кнопку "Save" в toolbar, если не хотим сохранять каждое изменение немедленно
+            // .toolbar {
+            //     ToolbarItem(placement: .navigationBarTrailing) {
+            //         Button("Save") {
+            //             viewModel.saveTheme()
+            //             viewModel.saveLanguage()
+            //             // Возможно, закрыть View или показать подтверждение
+            //         }
+            //     }
+            // }
+        }
     }
 }
 

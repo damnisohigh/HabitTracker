@@ -14,6 +14,7 @@ struct HabitRowView: View {
     let onEdit: () -> Void
 
     @State private var now = Date()
+    // @Environment(\.locale) var locale: Locale
     
     var body: some View {
         let habitColor = Color(hex: habit.color ?? "#FFFFFF")
@@ -25,16 +26,17 @@ struct HabitRowView: View {
                     .frame(width: 20, height: 20)
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(habit.title ?? "No Title")
+                    Text(habit.title ?? NSLocalizedString("No Title", comment: "Placeholder for habit with no title"))
                         .font(.headline)
                     
                     if habit.category?.lowercased() == "bad", let lastReset = habit.lastResetDate {
-                        Text("⏱️Abstinence: \(timeSince(lastReset, now: now))")
+                        let abstinenceLabel = NSLocalizedString("Abstinence: %@", comment: "Label for abstinence time, %@ is the time duration")
+                        Text(String(format: abstinenceLabel, timeSince(lastReset, now: now, shortStyle: true)))
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
                     
-                    Text(habit.habitType ?? "Unknown")
+                    Text(NSLocalizedString(habit.habitType ?? "Unknown", comment: "Habit type (Daily, Weekly, etc.) or Unknown if not set"))
                         .font(.subheadline)
                         .foregroundColor((habit.category ?? "").lowercased() == "bad" ? .red : .green)
                     
@@ -58,7 +60,7 @@ struct HabitRowView: View {
 
                     if habit.category?.lowercased() == "bad", let reset = resetBadHabit {
                         Button(action: reset) {
-                            Text("Broke")
+                            Text(NSLocalizedString("Broke", comment: "Button text to reset a bad habit timer"))
                                 .font(.caption)
                                 .foregroundColor(.red)
                         }
