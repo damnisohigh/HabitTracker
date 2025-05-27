@@ -19,8 +19,8 @@ struct HabitTrackerApp: App {
             return .light
         case .dark:
             return .dark
-        case .system, .none: // .none на случай, если rawValue не распознан
-            return nil // nil означает системную тему
+        case .system, .none:
+            return nil 
         }
     }
     

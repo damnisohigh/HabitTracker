@@ -16,7 +16,6 @@ enum SettingsKeys {
     static let globalNotificationsEnabled = "globalNotificationsEnabled"
 }
 
-// Возможные варианты темы
 enum AppTheme: String, CaseIterable, Identifiable {
     case system = "System"
     case light = "Light"
@@ -25,7 +24,6 @@ enum AppTheme: String, CaseIterable, Identifiable {
     var id: String { self.rawValue }
 }
 
-// Возможные варианты языка
 enum AppLanguage: String, CaseIterable, Identifiable {
     case english = "English"
     case ukrainian = "Ukrainian"
@@ -49,7 +47,6 @@ class SettingsViewModel: ObservableObject {
     @Published var selectedLanguage: AppLanguage {
         didSet {
             saveLanguage()
-            // Это изменит язык приложения после перезапуска
             UserDefaults.standard.set([selectedLanguage.localeIdentifier], forKey: "AppleLanguages")
             print("AppleLanguages set to: [\(selectedLanguage.localeIdentifier)]. App restart might be needed for full effect.")
         }
@@ -61,9 +58,6 @@ class SettingsViewModel: ObservableObject {
                 NotificationManager.shared.cancelAllNotifications()
                 print("All pending notifications cancelled due to global setting.")
             }
-            // If globally enabled, existing per-habit notifications are NOT automatically rescheduled here.
-            // This would require iterating through all habits and calling scheduleOrCancelNotification.
-            // For simplicity, we'll let them be rescheduled individually or upon app restart/habit reset.
         }
     }
 
@@ -79,17 +73,14 @@ class SettingsViewModel: ObservableObject {
         print("SettingsViewModel initialized. Theme: \(selectedTheme.rawValue), Language: \(selectedLanguage.rawValue), Global Notifications: \(globalNotificationsEnabled)")
     }
 
-    // Функции для сохранения, если решим не использовать didSet
     func saveTheme() {
         UserDefaults.standard.set(selectedTheme.rawValue, forKey: SettingsKeys.appTheme)
         print("Theme saved: \(selectedTheme.rawValue)")
-        // Здесь может быть логика немедленного применения темы
     }
 
     func saveLanguage() {
         UserDefaults.standard.set(selectedLanguage.rawValue, forKey: SettingsKeys.appLanguage)
         print("Language saved: \(selectedLanguage.rawValue)")
-        // Здесь может быть логика немедленного применения языка
     }
     
     func saveGlobalNotificationsSetting() {

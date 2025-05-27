@@ -104,7 +104,7 @@ struct StatisticsView: View {
     private func iconName(for frequency: StatisticsViewModel.HabitFrequency) -> String {
         switch frequency {
         case .daily: return "sun.max.fill"
-        case .weekly: return "arrow.7.circlepath"
+        case .weekly: return "arrow.clockwise.circle"
         case .monthly: return "calendar"
         }
     }

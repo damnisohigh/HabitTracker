@@ -272,8 +272,6 @@ class HabitListViewModel: ObservableObject {
                 habitsDidChange = true
                 print("Reset habit: \(habit.title ?? "Unknown")")
 
-                // Reschedule notification if it's enabled and habit is not a "Bad" habit
-                // (Bad habits don't get "completed" in the same way and don't need reminders to "do" them)
                 if habit.notificationsEnabled && habit.category != badHabitCategoryString && !habit.isCompleted {
                     scheduleOrCancelNotification(for: habit)
                     print("Rescheduled notification for reset habit: \(habit.title ?? "")")
@@ -283,7 +281,7 @@ class HabitListViewModel: ObservableObject {
 
         if habitsDidChange {
             saveContext()
-            fetchHabits() // Refetch to update UI if needed
+            fetchHabits()
             print("Habit completion statuses checked and reset where necessary.")
         }
     }

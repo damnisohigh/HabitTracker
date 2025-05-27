@@ -4,16 +4,10 @@ struct HabitDetailView: View {
     @Environment(\.dismiss) var dismiss
     let habit: Habit
     
-    // State для показа HabitFormView в режиме редактирования
     @State private var isShowingEditView = false
-    // Нужен доступ к HabitListViewModel, чтобы передать его в HabitFormView
-    // Это немного усложняет, если HabitDetailView вызывается из контекста, где нет ViewModel.
-    // Пока оставим это так, возможно, понадобится EnvironmentObject.
-    // Для простоты, пока не будем передавать viewModel, а просто покажем детали.
-    // Редактирование можно будет добавить как следующий шаг.
 
     var body: some View {
-        NavigationView { // Обертка для NavigationBar с кнопкой "Edit" и заголовком
+        NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     Text(habit.title ?? NSLocalizedString("No Title", comment: "Placeholder for habit with no title"))
@@ -80,19 +74,8 @@ struct HabitDetailView: View {
                         dismiss()
                     }
                 }
-                // Если решим добавить кнопку Edit здесь:
-                // ToolbarItem(placement: .navigationBarTrailing) {
-                //     Button(NSLocalizedString("Edit", comment: "Edit button label")) {
-                //         // isShowingEditView = true // Это потребует .sheet(isPresented: $isShowingEditView)
-                //     }
-                // }
             }
         }
-        // Если кнопка Edit будет в toolbar, и мы хотим показать HabitFormView модально:
-        // .sheet(isPresented: $isShowingEditView) {
-        //     // HabitFormView(viewModel: /* нужен viewModel */, habitToEdit: habit)
-        // }
     }
 }
 
-// Добавим ключи локализации

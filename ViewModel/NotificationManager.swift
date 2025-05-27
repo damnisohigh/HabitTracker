@@ -28,7 +28,7 @@ class NotificationManager {
             dateComponents.weekday = weekday // 1 = Sunday, 2 = Monday, ..., 7 = Saturday
         }
         if let day {
-            dateComponents.day = day // Day of the month
+            dateComponents.day = day 
         }
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: repeats)
